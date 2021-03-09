@@ -20,14 +20,26 @@ namespace ProductService.Controllers
         public IEnumerable<Product> Index()
         {
             using var session = _store.LightweightSession();
-            var p = session.Query<Product>().ToList();
-            return p;
+            //var p = session.Query<Product>().ToList();
+            //return p;
+
+            //var cats = Category.Defaults;
+            //foreach (var c in cats)
+            //    session.Store(c);
+
+            var p = new Product(1010, "Lighter", 1000, "~", Category.First);
+            session.Store(p);
+            session.SaveChanges();
+
+
+            return Product.Shop;
         }
 
         //public Product Index()
         //{
         //    using var session = _store.LightweightSession();
-        //    var  p = session.Query<Product>().First();
+        //    //var p = session.Query<Product>().First();
+        //    var p = session.Load<Product>(1005);
         //    return p;
         //}
 
